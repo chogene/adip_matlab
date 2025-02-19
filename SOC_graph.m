@@ -26,25 +26,27 @@ initSOC = 0; % [%]
 
 time_T2 = T2.TestTime_h / 60;
 
-p1 = [21.5942 5.2];
-p2 = [23.5 5.2];
-dp = p2 - p1;
+% calculating absolute time?
+time0 = time_T2 - time_T2(1);
+dt = [0; diff(time0)];
+
+% calculate SOC
+SOC = zeros(height(T2), 1);
+SOC(1) = initSOC;
+
+for i = 2:height(T2)
 
 figure('Name', '001 CCCV');
-
-% add arrows
-%annotation('CC', p1, p2);
-
 yyaxis left;
 plot(time_T2, T2.Voltage_V, 'b-');
 xlabel('Time');
 ylabel('Voltage [V]');
+xlim([21.5942 25.66]);
 hold on;
 
 yyaxis right;
 plot(time_T2, T2.Current_A, 'r');
 ylabel('Current [A]');
-xlim([21.5942 26])
 grid on;
 
 %figure('Name', '001 SOC');
