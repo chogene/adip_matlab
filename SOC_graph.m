@@ -28,7 +28,7 @@ time_T2 = T2.TestTime_h / 60;
 
 % calculating absolute time?
 time0 = time_T2 - time_T2(1);
-dt = [0; diff(time0)];
+dt = [0; -diff(time0)];
 
 % calculate SOC
 SOC = zeros(height(T2), 1);
@@ -38,10 +38,9 @@ for i = 2:height(T2)
     dQ = signedCurrent(i) * (dt(i));
     dSOC_percent = (dQ / nominalCapacity) * 100;
     SOC(i) = SOC(i-1) + dSOC_percent;
-    SOC(i) = -SOC(i)
 end
 
-figure('Name', '001 CCCV');
+figure('Name', '001 CCCV', 'NumberTitle', 'off');
 yyaxis left;
 plot(time_T2, T2.Voltage_V, 'b-');
 xlabel('Time');
@@ -54,5 +53,8 @@ plot(time_T2, T2.Current_A, 'r');
 ylabel('Current [A]');
 grid on;
 
-figure('Name', '001 SOC');
+figure('Name', '001 SOC', 'NumberTitle', 'off');
 plot(SOC, T2.Voltage_V, 'r-');
+xlabel('SOC [%]');
+ylabel('Voltage [V}');
+grid on;
