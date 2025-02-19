@@ -11,7 +11,8 @@ T.Properties.VariableNames = {...
 % plot first cycle and exclude
 
 firstCycle = (T.CycleC == 1);
-secondCycle = (T.CycleC == 2) & (T.Step == 7);
+secondCycle = (T.CycleC == 2) & ((T.Step == 7) | (T.Step == 8));
+thirdCycle = (T.CycleC == 3);
 
 figure;
 plot(T.TestTime_h(firstCycle) / 60, T.Voltage_V(firstCycle), 'b');
@@ -22,17 +23,28 @@ yyaxis right;
 plot(T.TestTime_h(firstCycle) / 60, T.Current_A(firstCycle), 'r');
 xlabel('Time (hours)');
 ylabel('Current [A]');
+hold off;
 grid on;
 
 % plot rest
 % try using step 
-% T(firstCycle, :) = [];
+T(firstCycle, :) = [];
 time = T.TestTime_h / 60; 
 current = T.Current_A;
 voltage = T.Voltage_V;
 
 
-% T2 = T(T.CycleC == 3, :);
+% figure;
+% plot(T.TestTime_h(thirdCycle) / 60, T.Voltage_V(thirdCycle), 'b');
+% ylabel("Voltage [V]");
+% hold on;
+% 
+% yyaxis right;
+% plot(T.TestTime_h(thirdCycle) / 60, T.Current_A(thirdCycle), 'r');
+% xlabel("Time [hours]");
+% ylabel("Current [A]");
+% hold off;
+% grid on;
 
 figure;
 plot(T.TestTime_h(secondCycle) / 60, T.Voltage_V(secondCycle), 'b');
@@ -43,5 +55,6 @@ yyaxis right;
 plot(T.TestTime_h(secondCycle) / 60, T.Current_A(secondCycle), 'r');
 xlabel("Time [hours]");
 ylabel("Current [A]");
+hold off;
 grid on;
 
