@@ -43,7 +43,7 @@ end
 figure('Name', '001 CCCV', 'NumberTitle', 'off');
 yyaxis left;
 plot(time_T2, T2.Voltage_V, 'b-');
-xlabel('Time');
+xlabel('Time [h]');
 ylabel('Voltage [V]');
 xlim([21.5942 25.66]);
 hold on;
@@ -57,4 +57,5 @@ figure('Name', '001 SOC', 'NumberTitle', 'off');
 plot(SOC, T2.Voltage_V, 'r-');
 xlabel('SOC [%]');
 ylabel('Voltage [V}');
+xlim([0 100]);
 grid on;
