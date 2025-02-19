@@ -35,6 +35,11 @@ SOC = zeros(height(T2), 1);
 SOC(1) = initSOC;
 
 for i = 2:height(T2)
+    dQ = signedCurrent(i) * (dt(i));
+    dSOC_percent = (dQ / nominalCapacity) * 100;
+    SOC(i) = SOC(i-1) + dSOC_percent;
+    SOC(i) = -SOC(i)
+end
 
 figure('Name', '001 CCCV');
 yyaxis left;
@@ -49,6 +54,5 @@ plot(time_T2, T2.Current_A, 'r');
 ylabel('Current [A]');
 grid on;
 
-%figure('Name', '001 SOC');
-%yyaxis left;
-%plot(T.TestTime_h, T.Capacity_Ah, 'b-');
+figure('Name', '001 SOC');
+plot(SOC, T2.Voltage_V, 'r-');
