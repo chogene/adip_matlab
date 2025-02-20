@@ -10,9 +10,8 @@ T.Properties.VariableNames = {...
 
 % plot first cycle and exclude
 
-firstCycle = (T.CycleC == 1);
-secondCycle = (T.CycleC == 2) & ((T.Step == 7) | (T.Step == 8));
-thirdCycle = (T.CycleC == 3);
+firstCycle = (T.CycleC == 1) & ((T.Step == 5) | (T.Step == 6));
+% secondCycle = (T.CycleC == 2) & ((T.Step == 7) | (T.Step == 8));
 
 figure;
 plot(T.TestTime_h(firstCycle) / 60, T.Voltage_V(firstCycle), 'b');
@@ -46,15 +45,15 @@ voltage = T.Voltage_V;
 % hold off;
 % grid on;
 
-figure;
-plot(T.TestTime_h(secondCycle) / 60, T.Voltage_V(secondCycle), 'b');
-ylabel("Voltage [V]");
-hold on;
-
-yyaxis right;
-plot(T.TestTime_h(secondCycle) / 60, T.Current_A(secondCycle), 'r');
-xlabel("Time [hours]");
-ylabel("Current [A]");
-hold off;
-grid on;
+% figure;
+% plot(T.TestTime_h(secondCycle) / 60, T.Voltage_V(secondCycle), 'b');
+% ylabel("Voltage [V]");
+% hold on;
+% 
+% yyaxis right;
+% plot(T.TestTime_h(secondCycle) / 60, T.Current_A(secondCycle), 'r');
+% xlabel("Time [hours]");
+% ylabel("Current [A]");
+% hold off;
+% grid on;
 
