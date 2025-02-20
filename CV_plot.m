@@ -8,18 +8,20 @@ T.Properties.VariableNames = {...
     'VAR1', 'VAR2', 'VAR3', 'VAR4', 'VAR5', 'VAR6', 'VAR7', 'VAR8', 'VAR9', 'VAR10',...
     'VAR11', 'VAR12', 'VAR13', 'VAR14', 'VAR15'};
 
-% plot first cycle and exclude
-
 firstCycle = (T.CycleC == 1) & ((T.Step == 5) | (T.Step == 6));
-% secondCycle = (T.CycleC == 2) & ((T.Step == 7) | (T.Step == 8));
+
+% Calculating time excluding the inital adjusting period
+time = T.TestTime_h(firstCycle);
+time0 = (time - time(1)) / 60;
+% time0 = time_T_n - time_T_n(1);
 
 figure;
-plot(T.TestTime_h(firstCycle) / 60, T.Voltage_V(firstCycle), 'b');
+plot(time0, T.Voltage_V(firstCycle), 'b');
 ylabel('Voltage [V]');
 hold on;
 
 yyaxis right;
-plot(T.TestTime_h(firstCycle) / 60, T.Current_A(firstCycle), 'r');
+plot(time0, T.Current_A(firstCycle), 'r');
 xlabel('Time (hours)');
 ylabel('Current [A]');
 hold off;
