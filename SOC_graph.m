@@ -18,7 +18,6 @@ T_n = T(T.CycleC == 4, :);
 
 % strcmp: string compare
 % checkRest = strcmp(T_n.Mode, 'R');
-% T_n = T_n(~checkRest, :);
 checkDischarge = strcmp(T_n.Mode, 'D');
 checkCharge = strcmp(T_n.Mode, 'C');
 
