@@ -1,4 +1,4 @@
-clear; clc; close all;
+clear; clc; % close all;
 
 T = readtable('250210_initialcapa_001_totaldata.txt');
 
@@ -52,24 +52,27 @@ for i = 2:height(T_n)
     SOC(i) = SOC(i-1) + dSOC;
 end
 
-figure('Name', '001 Cycle 4', 'NumberTitle', 'off');
-plot(time0, T_n.Voltage_V, 'b');
-ylabel('Voltage [V]');
-hold on;
+% figure('Name', '001 Cycle 4', 'NumberTitle', 'off');
+% plot(time0, T_n.Voltage_V, 'b');
+% ylabel('Voltage [V]');
+% hold on;
+% 
+% yyaxis right;
+% plot(time0, T_n.Current_A, 'r');
+% xlabel('Time (hours)');
+% ylabel('Current [A]');
+% hold off;
+% grid on;
 
-yyaxis right;
-plot(time0, T_n.Current_A, 'r');
-xlabel('Time (hours)');
-ylabel('Current [A]');
-hold off;
-grid on;
+voltage_charge = T_n.Voltage_V(checkCharge) + 0.0045;
+voltage_discharge = T_n.Voltage_V(checkDischarge) - 0.0045;
 
 figure('Name', '001 SOC', 'NumberTitle', 'off');
 hold on;
 grid on;
 
-plot(SOC(checkCharge), T_n.Voltage_V(checkCharge), 'r-');
-plot(SOC(checkDischarge), T_n.Voltage_V(checkDischarge), 'b-');
+plot(SOC(checkCharge), voltage_charge, 'r-');
+plot(SOC(checkDischarge), voltage_discharge, 'b-');
 
 xlabel('SOC [%]');
 ylabel('Voltage [V]');
